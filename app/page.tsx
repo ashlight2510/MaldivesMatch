@@ -1,11 +1,11 @@
-'use client';
+"use client";
 
-import { useState } from 'react';
-import { questions } from '@/data/questions';
-import { personalityTypes } from '@/data/personalityTypes';
-import { TestResult } from '@/types';
-import QuestionCard from '@/components/QuestionCard';
-import ResultPage from '@/components/ResultPage';
+import { useState } from "react";
+import { questions } from "@/data/questions";
+import { personalityTypes } from "@/data/personalityTypes";
+import { TestResult } from "@/types";
+import QuestionCard from "@/components/QuestionCard";
+import ResultPage from "@/components/ResultPage";
 
 export default function Home() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
@@ -62,31 +62,35 @@ export default function Home() {
 
     // 가장 높은 점수의 성향 타입 추출 (동률 포함)
     const traitScores = [
-      { key: 'luxury', value: normalizedScores.luxury },
-      { key: 'underwater', value: normalizedScores.underwater },
-      { key: 'lagoon', value: normalizedScores.lagoon },
-      { key: 'food', value: normalizedScores.food },
-      { key: 'activity', value: normalizedScores.activity },
-      { key: 'budget', value: normalizedScores.budget },
+      { key: "luxury", value: normalizedScores.luxury },
+      { key: "underwater", value: normalizedScores.underwater },
+      { key: "lagoon", value: normalizedScores.lagoon },
+      { key: "food", value: normalizedScores.food },
+      { key: "activity", value: normalizedScores.activity },
+      { key: "budget", value: normalizedScores.budget },
     ] as const;
 
     const highestScore = Math.max(...traitScores.map((trait) => trait.value));
-    const topTraits = traitScores.filter((trait) => trait.value === highestScore);
+    const topTraits = traitScores.filter(
+      (trait) => trait.value === highestScore
+    );
 
-    const traitToTypeId: Record<typeof traitScores[number]['key'], string> = {
-      luxury: 'luxury-healing',
-      underwater: 'underwater-explorer',
-      lagoon: 'lagoon-romantic',
-      food: 'foodie-allin',
-      activity: 'activity-adventurer',
-      budget: 'value-seeker',
+    const traitToTypeId: Record<(typeof traitScores)[number]["key"], string> = {
+      luxury: "luxury-healing",
+      underwater: "underwater-explorer",
+      lagoon: "lagoon-romantic",
+      food: "foodie-allin",
+      activity: "activity-adventurer",
+      budget: "value-seeker",
     };
 
     const bestMatches = topTraits
       .map((trait) =>
         personalityTypes.find((type) => type.id === traitToTypeId[trait.key])
       )
-      .filter((type): type is (typeof personalityTypes)[number] => Boolean(type));
+      .filter((type): type is (typeof personalityTypes)[number] =>
+        Boolean(type)
+      );
 
     const resolvedMatches =
       bestMatches.length > 0 ? bestMatches : [personalityTypes[0]];
@@ -120,19 +124,20 @@ export default function Home() {
               나의 몰디브 여행 성향 찾기
             </p>
             <p className="text-gray-500">
-              10개의 간단한 질문으로 나에게 딱 맞는 몰디브 스타일을 찾아보세요!
+              18개의 전문 질문으로 나에게 딱 맞는 몰디브 스타일을 찾아보세요!
             </p>
+            <p className="text-sm text-gray-400 mt-2">⏱️ 소요 시간: 약 3-5분</p>
           </div>
 
           <div className="mb-8 p-6 bg-blue-50 rounded-2xl">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
-              🎯 어떤 결과가 나올까요?
+              🎯 8가지 몰디브 여행 성향
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {personalityTypes.map((type) => (
                 <div
                   key={type.id}
-                  className="bg-white p-3 rounded-xl shadow-sm"
+                  className="bg-white p-3 rounded-xl shadow-sm hover:shadow-md transition-shadow"
                 >
                   <div className="text-3xl mb-1">{type.emoji}</div>
                   <div className="text-sm font-medium text-gray-700">
