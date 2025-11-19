@@ -30,6 +30,29 @@ export default function Home() {
   };
 
   const calculateResult = (userAnswers: number[]) => {
+    // 선택한 질문과 답변 로그 출력
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("📋 선택한 질문과 답변");
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+
+    userAnswers.forEach((answerIndex, questionIndex) => {
+      const question = questions[questionIndex];
+      const selectedOption = question.options[answerIndex];
+
+      console.log(`\n${questionIndex + 1}. ${question.question}`);
+      console.log(`   ✅ 선택: ${selectedOption.text}`);
+      console.log(`   📊 점수:`, {
+        luxury: selectedOption.scores.luxury,
+        underwater: selectedOption.scores.underwater,
+        lagoon: selectedOption.scores.lagoon,
+        food: selectedOption.scores.food,
+        activity: selectedOption.scores.activity,
+        budget: selectedOption.scores.budget,
+      });
+    });
+
+    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n");
+
     const totalScores = {
       luxury: 0,
       underwater: 0,
@@ -155,11 +178,58 @@ export default function Home() {
     const resolvedMatches =
       bestMatches.length > 0 ? bestMatches : [typeRankings[0].type];
 
+    // 결과 로그 출력
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("📊 계산된 점수 (정규화 후)");
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("럭셔리:", normalizedScores.luxury);
+    console.log("수중환경:", normalizedScores.underwater);
+    console.log("라군:", normalizedScores.lagoon);
+    console.log("음식:", normalizedScores.food);
+    console.log("액티비티:", normalizedScores.activity);
+    console.log("가성비:", normalizedScores.budget);
+
+    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("🎯 매칭된 성향 타입");
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    resolvedMatches.forEach((type, index) => {
+      console.log(`\n${index + 1}. ${type.emoji} ${type.name}`);
+      const ranking = typeRankings.find((r) => r.type.id === type.id);
+      if (ranking) {
+        console.log(`   유사도: ${ranking.similarity}%`);
+      }
+    });
+
+    console.log("\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    console.log("📈 전체 성향 타입 순위");
+    console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
+    typeRankings.forEach((ranking, index) => {
+      console.log(
+        `${index + 1}. ${ranking.type.emoji} ${ranking.type.name} - 유사도: ${
+          ranking.similarity
+        }%`
+      );
+    });
+    console.log("\n");
+
+    // 선택한 답변 정보 저장
+    const selectedAnswers = userAnswers.map((answerIndex, questionIndex) => {
+      const question = questions[questionIndex];
+      const selectedOption = question.options[answerIndex];
+      return {
+        questionId: question.id,
+        question: question.question,
+        selectedOption: selectedOption.text,
+        scores: selectedOption.scores,
+      };
+    });
+
     setResult({
       personalityTypes: resolvedMatches,
       scores: normalizedScores,
       topTraits,
       rankedTypes: typeRankings,
+      selectedAnswers,
     });
   };
 

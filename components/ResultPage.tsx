@@ -1,4 +1,4 @@
-'use client';
+"use client";
 
 import { TestResult, TraitKey } from "@/types";
 import RadarChart from "./RadarChart";
@@ -45,7 +45,8 @@ interface ResultPageProps {
 }
 
 export default function ResultPage({ result, onReset }: ResultPageProps) {
-  const { personalityTypes, scores, topTraits, rankedTypes } = result;
+  const { personalityTypes, scores, topTraits, rankedTypes, selectedAnswers } =
+    result;
   const primaryType = personalityTypes[0];
   const additionalRecommendations = rankedTypes
     .filter(
@@ -58,6 +59,96 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
     return null;
   }
 
+  const handleDownloadText = () => {
+    const now = new Date();
+    const dateStr = now.toISOString().split("T")[0];
+    const timeStr = now.toTimeString().split(" ")[0].replace(/:/g, "-");
+
+    let textContent =
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+    textContent += "🏝️ 몰디브 매치 - 여행 성향 분석 결과\n";
+    textContent += `📅 생성일시: ${dateStr} ${
+      now.toTimeString().split(" ")[0]
+    }\n`;
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+
+    // 선택한 질문과 답변
+    if (selectedAnswers && selectedAnswers.length > 0) {
+      textContent += "📋 선택한 질문과 답변\n";
+      textContent +=
+        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+
+      selectedAnswers.forEach((answer, index) => {
+        textContent += `${index + 1}. ${answer.question}\n`;
+        textContent += `   ✅ 선택: ${answer.selectedOption}\n`;
+        textContent += `   📊 점수: `;
+        textContent += `럭셔리(${answer.scores.luxury}) `;
+        textContent += `수중환경(${answer.scores.underwater}) `;
+        textContent += `라군(${answer.scores.lagoon}) `;
+        textContent += `음식(${answer.scores.food}) `;
+        textContent += `액티비티(${answer.scores.activity}) `;
+        textContent += `가성비(${answer.scores.budget})\n\n`;
+      });
+    }
+
+    // 계산된 점수
+    textContent += "📊 계산된 점수 (정규화 후)\n";
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+    textContent += `👑 럭셔리: ${scores.luxury}\n`;
+    textContent += `🐠 수중환경: ${scores.underwater}\n`;
+    textContent += `💙 라군: ${scores.lagoon}\n`;
+    textContent += `🍽️ 음식: ${scores.food}\n`;
+    textContent += `🏄 액티비티: ${scores.activity}\n`;
+    textContent += `💰 가성비: ${scores.budget}\n\n`;
+
+    // 매칭된 성향 타입
+    textContent += "🎯 매칭된 성향 타입\n";
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+    personalityTypes.forEach((type, index) => {
+      const ranking = rankedTypes.find((r) => r.type.id === type.id);
+      textContent += `${index + 1}. ${type.emoji} ${type.name}\n`;
+      if (ranking) {
+        textContent += `   유사도: ${ranking.similarity}%\n`;
+      }
+      textContent += `   설명: ${type.description}\n\n`;
+      textContent += `   주요 특징:\n`;
+      type.characteristics.forEach((char) => {
+        textContent += `   - ${char}\n`;
+      });
+      textContent += `\n   추천 리조트: ${type.resortRecommendation}\n\n`;
+    });
+
+    // 전체 성향 타입 순위
+    textContent += "📈 전체 성향 타입 순위\n";
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+    rankedTypes.forEach((ranking, index) => {
+      textContent += `${index + 1}. ${ranking.type.emoji} ${
+        ranking.type.name
+      } - 유사도: ${ranking.similarity}%\n`;
+    });
+
+    textContent +=
+      "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+    textContent += "Made with 💙 for Maldives Lovers\n";
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+
+    // 파일 다운로드
+    const blob = new Blob([textContent], { type: "text/plain;charset=utf-8" });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement("a");
+    link.href = url;
+    link.download = `몰디브매치_결과_${dateStr}_${timeStr}.txt`;
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+    URL.revokeObjectURL(url);
+  };
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-300 py-8 px-4">
       <div className="max-w-4xl mx-auto">
@@ -66,9 +157,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
           <h1 className="text-3xl md:text-4xl font-bold text-white mb-2">
             🎉 분석 완료!
           </h1>
-          <p className="text-white/90 text-lg">
-            당신의 몰디브 여행 성향은...
-          </p>
+          <p className="text-white/90 text-lg">당신의 몰디브 여행 성향은...</p>
         </div>
 
         {/* 성향 타입 카드 */}
@@ -193,50 +282,73 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
             📊 나의 여행 성향 분석
           </h3>
           <RadarChart scores={scores} />
-          
+
           {/* 점수 설명 */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
             <div className="text-center p-4 bg-purple-50 rounded-xl">
               <div className="text-3xl mb-2">👑</div>
               <div className="font-bold text-gray-800">럭셔리</div>
-              <div className="text-2xl font-bold text-purple-600">{scores.luxury}</div>
+              <div className="text-2xl font-bold text-purple-600">
+                {scores.luxury}
+              </div>
             </div>
             <div className="text-center p-4 bg-blue-50 rounded-xl">
               <div className="text-3xl mb-2">🐠</div>
               <div className="font-bold text-gray-800">수중환경</div>
-              <div className="text-2xl font-bold text-blue-600">{scores.underwater}</div>
+              <div className="text-2xl font-bold text-blue-600">
+                {scores.underwater}
+              </div>
             </div>
             <div className="text-center p-4 bg-cyan-50 rounded-xl">
               <div className="text-3xl mb-2">💙</div>
               <div className="font-bold text-gray-800">라군</div>
-              <div className="text-2xl font-bold text-cyan-600">{scores.lagoon}</div>
+              <div className="text-2xl font-bold text-cyan-600">
+                {scores.lagoon}
+              </div>
             </div>
             <div className="text-center p-4 bg-orange-50 rounded-xl">
               <div className="text-3xl mb-2">🍽️</div>
               <div className="font-bold text-gray-800">음식</div>
-              <div className="text-2xl font-bold text-orange-600">{scores.food}</div>
+              <div className="text-2xl font-bold text-orange-600">
+                {scores.food}
+              </div>
             </div>
             <div className="text-center p-4 bg-green-50 rounded-xl">
               <div className="text-3xl mb-2">🏄</div>
               <div className="font-bold text-gray-800">액티비티</div>
-              <div className="text-2xl font-bold text-green-600">{scores.activity}</div>
+              <div className="text-2xl font-bold text-green-600">
+                {scores.activity}
+              </div>
             </div>
             <div className="text-center p-4 bg-yellow-50 rounded-xl">
               <div className="text-3xl mb-2">💰</div>
               <div className="font-bold text-gray-800">가성비</div>
-              <div className="text-2xl font-bold text-yellow-600">{scores.budget}</div>
+              <div className="text-2xl font-bold text-yellow-600">
+                {scores.budget}
+              </div>
             </div>
           </div>
         </div>
 
         {/* 다시하기 버튼 */}
-        <div className="text-center">
-          <button
-            onClick={onReset}
-            className="bg-white text-blue-600 px-10 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transform hover:scale-105 transition-all duration-200 shadow-lg"
-          >
-            🔄 다시 테스트하기
-          </button>
+        <div className="text-center space-y-4">
+          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+            <button
+              onClick={handleDownloadText}
+              className="bg-green-500 text-white px-8 py-4 rounded-full text-lg font-semibold hover:bg-green-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              📥 결과 텍스트 파일 다운로드
+            </button>
+            <button
+              onClick={onReset}
+              className="bg-white text-blue-600 px-10 py-4 rounded-full text-lg font-semibold hover:bg-blue-50 transform hover:scale-105 transition-all duration-200 shadow-lg"
+            >
+              🔄 다시 테스트하기
+            </button>
+          </div>
+          <p className="text-white/80 text-sm">
+            다운로드 파일에는 선택한 모든 질문과 답변이 포함됩니다
+          </p>
         </div>
       </div>
     </div>

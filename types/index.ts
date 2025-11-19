@@ -1,10 +1,10 @@
 export type TraitKey =
-  | 'luxury'
-  | 'underwater'
-  | 'lagoon'
-  | 'food'
-  | 'activity'
-  | 'budget';
+  | "luxury"
+  | "underwater"
+  | "lagoon"
+  | "food"
+  | "activity"
+  | "budget";
 
 export type ScoreMap = Record<TraitKey, number>;
 
@@ -39,9 +39,17 @@ export interface RankedPersonalityType {
   similarity: number;
 }
 
+export interface SelectedAnswer {
+  questionId: number;
+  question: string;
+  selectedOption: string;
+  scores: ScoreMap;
+}
+
 export interface TestResult {
   personalityTypes: PersonalityType[];
   scores: ScoreMap;
   topTraits: TraitScore[];
   rankedTypes: RankedPersonalityType[];
+  selectedAnswers?: SelectedAnswer[];
 }
