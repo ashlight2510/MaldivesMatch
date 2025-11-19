@@ -9,7 +9,12 @@ interface ResultPageProps {
 }
 
 export default function ResultPage({ result, onReset }: ResultPageProps) {
-  const { personalityType, scores } = result;
+  const { personalityTypes, scores } = result;
+  const primaryType = personalityTypes[0];
+
+  if (!primaryType) {
+    return null;
+  }
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-300 py-8 px-4">
@@ -27,12 +32,12 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
         {/* 성향 타입 카드 */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 mb-6">
           <div className="text-center mb-8">
-            <div className="text-7xl mb-4">{personalityType.emoji}</div>
+            <div className="text-7xl mb-4">{primaryType.emoji}</div>
             <h2 className="text-3xl md:text-4xl font-bold text-gray-800 mb-3">
-              {personalityType.name}
+              {primaryType.name}
             </h2>
             <p className="text-lg text-gray-600 leading-relaxed">
-              {personalityType.description}
+              {primaryType.description}
             </p>
           </div>
 
@@ -42,7 +47,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
               ✨ 주요 특징
             </h3>
             <div className="space-y-3">
-              {personalityType.characteristics.map((char, index) => (
+              {primaryType.characteristics.map((char, index) => (
                 <div
                   key={index}
                   className="bg-gradient-to-r from-blue-50 to-cyan-50 p-4 rounded-xl"
@@ -59,10 +64,36 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
               🏨 추천 리조트
             </h3>
             <p className="text-gray-700 leading-relaxed">
-              {personalityType.resortRecommendation}
+              {primaryType.resortRecommendation}
             </p>
           </div>
         </div>
+
+        {personalityTypes.length > 1 && (
+          <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-4">
+              ⚖️ 동률로 나온 다른 추천 성향
+            </h3>
+            <div className="grid md:grid-cols-2 gap-4">
+              {personalityTypes.slice(1).map((type) => (
+                <div
+                  key={type.id}
+                  className="border border-blue-100 rounded-2xl p-4 flex items-start space-x-4"
+                >
+                  <div className="text-3xl">{type.emoji}</div>
+                  <div>
+                    <div className="font-semibold text-gray-800">
+                      {type.name}
+                    </div>
+                    <p className="text-sm text-gray-600 mt-1">
+                      {type.description}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
 
         {/* 6각형 그래프 */}
         <div className="bg-white rounded-3xl shadow-2xl p-8 md:p-10 mb-6">
@@ -119,4 +150,3 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
     </div>
   );
 }
-

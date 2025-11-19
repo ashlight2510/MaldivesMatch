@@ -60,28 +60,39 @@ export default function Home() {
       budget: Math.round((totalScores.budget / maxScore) * 100),
     };
 
-    // 가장 가까운 성향 타입 찾기
-    let bestMatch = personalityTypes[0];
-    let minDistance = Infinity;
+    // 가장 높은 점수의 성향 타입 추출 (동률 포함)
+    const traitScores = [
+      { key: 'luxury', value: normalizedScores.luxury },
+      { key: 'underwater', value: normalizedScores.underwater },
+      { key: 'lagoon', value: normalizedScores.lagoon },
+      { key: 'food', value: normalizedScores.food },
+      { key: 'activity', value: normalizedScores.activity },
+      { key: 'budget', value: normalizedScores.budget },
+    ] as const;
 
-    personalityTypes.forEach((type) => {
-      const distance = Math.sqrt(
-        Math.pow(normalizedScores.luxury - type.scores.luxury, 2) +
-        Math.pow(normalizedScores.underwater - type.scores.underwater, 2) +
-        Math.pow(normalizedScores.lagoon - type.scores.lagoon, 2) +
-        Math.pow(normalizedScores.food - type.scores.food, 2) +
-        Math.pow(normalizedScores.activity - type.scores.activity, 2) +
-        Math.pow(normalizedScores.budget - type.scores.budget, 2)
-      );
+    const highestScore = Math.max(...traitScores.map((trait) => trait.value));
+    const topTraits = traitScores.filter((trait) => trait.value === highestScore);
 
-      if (distance < minDistance) {
-        minDistance = distance;
-        bestMatch = type;
-      }
-    });
+    const traitToTypeId: Record<typeof traitScores[number]['key'], string> = {
+      luxury: 'luxury-healing',
+      underwater: 'underwater-explorer',
+      lagoon: 'lagoon-romantic',
+      food: 'foodie-allin',
+      activity: 'activity-adventurer',
+      budget: 'value-seeker',
+    };
+
+    const bestMatches = topTraits
+      .map((trait) =>
+        personalityTypes.find((type) => type.id === traitToTypeId[trait.key])
+      )
+      .filter((type): type is (typeof personalityTypes)[number] => Boolean(type));
+
+    const resolvedMatches =
+      bestMatches.length > 0 ? bestMatches : [personalityTypes[0]];
 
     setResult({
-      personalityType: bestMatch,
+      personalityTypes: resolvedMatches,
       scores: normalizedScores,
     });
   };
@@ -173,4 +184,3 @@ export default function Home() {
     </div>
   );
 }
-

@@ -34,7 +34,7 @@ export interface PersonalityType {
 }
 
 export interface TestResult {
-  personalityType: PersonalityType;
+  personalityTypes: PersonalityType[];
   scores: {
     luxury: number;
     underwater: number;
@@ -44,4 +44,3 @@ export interface TestResult {
     budget: number;
   };
 }
-
