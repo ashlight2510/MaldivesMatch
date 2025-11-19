@@ -3,7 +3,7 @@
 import { useState } from "react";
 import { questions } from "@/data/questions";
 import { personalityTypes } from "@/data/personalityTypes";
-import { TestResult } from "@/types";
+import { TestResult, TraitKey } from "@/types";
 import QuestionCard from "@/components/QuestionCard";
 import ResultPage from "@/components/ResultPage";
 
@@ -60,22 +60,14 @@ export default function Home() {
       budget: Math.round((totalScores.budget / maxScore) * 100),
     };
 
-    // 가장 높은 점수의 성향 타입 추출 (동률 포함)
-    const traitScores = [
-      { key: "luxury", value: normalizedScores.luxury },
-      { key: "underwater", value: normalizedScores.underwater },
-      { key: "lagoon", value: normalizedScores.lagoon },
-      { key: "food", value: normalizedScores.food },
-      { key: "activity", value: normalizedScores.activity },
-      { key: "budget", value: normalizedScores.budget },
-    ] as const;
+    const traitEntries = (Object.entries(normalizedScores) as [TraitKey, number][])
+      .map(([key, value]) => ({ key, value }))
+      .sort((a, b) => b.value - a.value);
 
-    const highestScore = Math.max(...traitScores.map((trait) => trait.value));
-    const topTraits = traitScores.filter(
-      (trait) => trait.value === highestScore
-    );
+    const highestScore = traitEntries[0]?.value ?? 0;
+    const topTraits = traitEntries.filter((trait) => trait.value === highestScore);
 
-    const traitToTypeId: Record<(typeof traitScores)[number]["key"], string> = {
+    const traitToTypeId: Record<TraitKey, string> = {
       luxury: "luxury-healing",
       underwater: "underwater-explorer",
       lagoon: "lagoon-romantic",
@@ -84,20 +76,42 @@ export default function Home() {
       budget: "value-seeker",
     };
 
-    const bestMatches = topTraits
-      .map((trait) =>
-        personalityTypes.find((type) => type.id === traitToTypeId[trait.key])
-      )
-      .filter((type): type is (typeof personalityTypes)[number] =>
-        Boolean(type)
-      );
+    const maxDistance = Math.sqrt(6 * Math.pow(100, 2));
+    const typeRankings = personalityTypes
+      .map((type) => {
+        const distance = Math.sqrt(
+          Math.pow(normalizedScores.luxury - type.scores.luxury, 2) +
+            Math.pow(normalizedScores.underwater - type.scores.underwater, 2) +
+            Math.pow(normalizedScores.lagoon - type.scores.lagoon, 2) +
+            Math.pow(normalizedScores.food - type.scores.food, 2) +
+            Math.pow(normalizedScores.activity - type.scores.activity, 2) +
+            Math.pow(normalizedScores.budget - type.scores.budget, 2)
+        );
+        const similarity = Math.max(
+          0,
+          Math.round(100 - (distance / maxDistance) * 100)
+        );
+
+        return { type, similarity };
+      })
+      .sort((a, b) => b.similarity - a.similarity);
+
+    const topTraitIds = new Set(
+      topTraits.map((trait) => traitToTypeId[trait.key])
+    );
+
+    const bestMatches = typeRankings
+      .filter(({ type }) => topTraitIds.has(type.id))
+      .map(({ type }) => type);
 
     const resolvedMatches =
-      bestMatches.length > 0 ? bestMatches : [personalityTypes[0]];
+      bestMatches.length > 0 ? bestMatches : [typeRankings[0].type];
 
     setResult({
       personalityTypes: resolvedMatches,
       scores: normalizedScores,
+      topTraits,
+      rankedTypes: typeRankings,
     });
   };
 

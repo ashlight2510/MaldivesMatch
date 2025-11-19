@@ -1,3 +1,13 @@
+export type TraitKey =
+  | 'luxury'
+  | 'underwater'
+  | 'lagoon'
+  | 'food'
+  | 'activity'
+  | 'budget';
+
+export type ScoreMap = Record<TraitKey, number>;
+
 export interface Question {
   id: number;
   question: string;
@@ -6,14 +16,7 @@ export interface Question {
 
 export interface Option {
   text: string;
-  scores: {
-    luxury: number;
-    underwater: number;
-    lagoon: number;
-    food: number;
-    activity: number;
-    budget: number;
-  };
+  scores: ScoreMap;
 }
 
 export interface PersonalityType {
@@ -23,24 +26,22 @@ export interface PersonalityType {
   description: string;
   characteristics: string[];
   resortRecommendation: string;
-  scores: {
-    luxury: number;
-    underwater: number;
-    lagoon: number;
-    food: number;
-    activity: number;
-    budget: number;
-  };
+  scores: ScoreMap;
+}
+
+export interface TraitScore {
+  key: TraitKey;
+  value: number;
+}
+
+export interface RankedPersonalityType {
+  type: PersonalityType;
+  similarity: number;
 }
 
 export interface TestResult {
   personalityTypes: PersonalityType[];
-  scores: {
-    luxury: number;
-    underwater: number;
-    lagoon: number;
-    food: number;
-    activity: number;
-    budget: number;
-  };
+  scores: ScoreMap;
+  topTraits: TraitScore[];
+  rankedTypes: RankedPersonalityType[];
 }

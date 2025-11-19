@@ -1,7 +1,43 @@
 'use client';
 
-import { TestResult } from '@/types';
-import RadarChart from './RadarChart';
+import { TestResult, TraitKey } from "@/types";
+import RadarChart from "./RadarChart";
+
+const traitMeta: Record<
+  TraitKey,
+  { label: string; emoji: string; badgeClass: string }
+> = {
+  luxury: {
+    label: "럭셔리",
+    emoji: "👑",
+    badgeClass: "bg-purple-100 text-purple-700",
+  },
+  underwater: {
+    label: "수중환경",
+    emoji: "🐠",
+    badgeClass: "bg-blue-100 text-blue-700",
+  },
+  lagoon: {
+    label: "라군",
+    emoji: "💙",
+    badgeClass: "bg-cyan-100 text-cyan-700",
+  },
+  food: {
+    label: "음식",
+    emoji: "🍽️",
+    badgeClass: "bg-orange-100 text-orange-700",
+  },
+  activity: {
+    label: "액티비티",
+    emoji: "🏄",
+    badgeClass: "bg-green-100 text-green-700",
+  },
+  budget: {
+    label: "가성비",
+    emoji: "💰",
+    badgeClass: "bg-yellow-100 text-yellow-700",
+  },
+};
 
 interface ResultPageProps {
   result: TestResult;
@@ -9,8 +45,14 @@ interface ResultPageProps {
 }
 
 export default function ResultPage({ result, onReset }: ResultPageProps) {
-  const { personalityTypes, scores } = result;
+  const { personalityTypes, scores, topTraits, rankedTypes } = result;
   const primaryType = personalityTypes[0];
+  const additionalRecommendations = rankedTypes
+    .filter(
+      ({ type }) =>
+        !personalityTypes.some((selected) => selected.id === type.id)
+    )
+    .slice(0, 3);
 
   if (!primaryType) {
     return null;
@@ -39,6 +81,22 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
             <p className="text-lg text-gray-600 leading-relaxed">
               {primaryType.description}
             </p>
+            {topTraits.length > 0 && (
+              <div className="mt-6 flex flex-wrap justify-center gap-3">
+                {topTraits.map((trait) => {
+                  const meta = traitMeta[trait.key];
+                  return (
+                    <div
+                      key={trait.key}
+                      className={`px-4 py-2 rounded-full text-sm font-semibold ${meta.badgeClass}`}
+                    >
+                      <span className="mr-2">{meta.emoji}</span>
+                      {meta.label} {trait.value}%
+                    </div>
+                  );
+                })}
+              </div>
+            )}
           </div>
 
           {/* 특징 */}
@@ -88,6 +146,40 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
                     <p className="text-sm text-gray-600 mt-1">
                       {type.description}
                     </p>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {additionalRecommendations.length > 0 && (
+          <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
+            <h3 className="text-xl font-bold text-gray-800 mb-4">
+              📌 성향 기반 추가 추천
+            </h3>
+            <div className="space-y-4">
+              {additionalRecommendations.map(({ type, similarity }) => (
+                <div
+                  key={type.id}
+                  className="border border-blue-100 rounded-2xl p-4 flex items-center justify-between gap-4"
+                >
+                  <div className="flex items-start space-x-3">
+                    <div className="text-3xl">{type.emoji}</div>
+                    <div>
+                      <div className="font-semibold text-gray-800">
+                        {type.name}
+                      </div>
+                      <p className="text-sm text-gray-600 mt-1">
+                        {type.description}
+                      </p>
+                    </div>
+                  </div>
+                  <div className="text-right">
+                    <div className="text-xs text-gray-500">일치도</div>
+                    <div className="text-xl font-bold text-blue-600">
+                      {similarity}%
+                    </div>
                   </div>
                 </div>
               ))}
