@@ -56,7 +56,7 @@ export const questions: Question[] = [
     question: "🎬 이번 여행에서 가장 먼저 떠오르는 장면은?",
     options: [
       {
-        text: "개인 버틀러와 스파에서 완전한 휴식",
+        text: "완벽한 프라이버시와 힐링 - 풀빌라에서 휴식",
         scores: {
           luxury: 10,
           underwater: 4,

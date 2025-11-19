@@ -60,12 +60,16 @@ export default function Home() {
       budget: Math.round((totalScores.budget / maxScore) * 100),
     };
 
-    const traitEntries = (Object.entries(normalizedScores) as [TraitKey, number][])
+    const traitEntries = (
+      Object.entries(normalizedScores) as [TraitKey, number][]
+    )
       .map(([key, value]) => ({ key, value }))
       .sort((a, b) => b.value - a.value);
 
     const highestScore = traitEntries[0]?.value ?? 0;
-    const topTraits = traitEntries.filter((trait) => trait.value === highestScore);
+    const topTraits = traitEntries.filter(
+      (trait) => trait.value === highestScore
+    );
 
     const traitToTypeId: Record<TraitKey, string> = {
       luxury: "luxury-healing",
@@ -75,6 +79,18 @@ export default function Home() {
       activity: "activity-adventurer",
       budget: "value-seeker",
     };
+
+    // 특정 선택에 대한 강제 매칭 로직
+    // 만타레이를 선택했으면 수중 탐험가형 우선 고려
+    const selectedMantaRay = userAnswers[1] === 1; // 질문 2번의 두 번째 옵션 (만타레이)
+
+    // 수중 환경이 라군보다 훨씬 높으면 수중 탐험가형 우선
+    const underwaterDominant =
+      normalizedScores.underwater > normalizedScores.lagoon + 30;
+
+    // 라군이 수중보다 훨씬 높으면 라군 낭만형 우선
+    const lagoonDominant =
+      normalizedScores.lagoon > normalizedScores.underwater + 30;
 
     const maxDistance = Math.sqrt(6 * Math.pow(100, 2));
     const typeRankings = personalityTypes
@@ -87,10 +103,26 @@ export default function Home() {
             Math.pow(normalizedScores.activity - type.scores.activity, 2) +
             Math.pow(normalizedScores.budget - type.scores.budget, 2)
         );
-        const similarity = Math.max(
+
+        let similarity = Math.max(
           0,
           Math.round(100 - (distance / maxDistance) * 100)
         );
+
+        // 만타레이 선택 시 수중 탐험가형 보너스
+        if (selectedMantaRay && type.id === "underwater-explorer") {
+          similarity += 20;
+        }
+
+        // 수중 환경이 압도적이면 수중 탐험가형 보너스
+        if (underwaterDominant && type.id === "underwater-explorer") {
+          similarity += 15;
+        }
+
+        // 라군이 압도적이면 라군 낭만형 보너스
+        if (lagoonDominant && type.id === "lagoon-romantic") {
+          similarity += 15;
+        }
 
         return { type, similarity };
       })
@@ -99,6 +131,22 @@ export default function Home() {
     const topTraitIds = new Set(
       topTraits.map((trait) => traitToTypeId[trait.key])
     );
+
+    // 만타레이 선택했으면 수중 탐험가형 강제 매칭
+    if (selectedMantaRay) {
+      const underwaterType = personalityTypes.find(
+        (t) => t.id === "underwater-explorer"
+      );
+      if (underwaterType) {
+        setResult({
+          personalityTypes: [underwaterType],
+          scores: normalizedScores,
+          topTraits,
+          rankedTypes: typeRankings,
+        });
+        return;
+      }
+    }
 
     const bestMatches = typeRankings
       .filter(({ type }) => topTraitIds.has(type.id))
