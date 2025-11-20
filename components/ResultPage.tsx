@@ -81,27 +81,9 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
 
       selectedAnswers.forEach((answer, index) => {
         textContent += `${index + 1}. ${answer.question}\n`;
-        textContent += `   ✅ 선택: ${answer.selectedOption}\n`;
-        textContent += `   📊 점수: `;
-        textContent += `럭셔리(${answer.scores.luxury}) `;
-        textContent += `수중환경(${answer.scores.underwater}) `;
-        textContent += `라군(${answer.scores.lagoon}) `;
-        textContent += `음식(${answer.scores.food}) `;
-        textContent += `액티비티(${answer.scores.activity}) `;
-        textContent += `가성비(${answer.scores.budget})\n\n`;
+        textContent += `   ✅ 선택: ${answer.selectedOption}\n\n`;
       });
     }
-
-    // 계산된 점수
-    textContent += "📊 계산된 점수 (정규화 후)\n";
-    textContent +=
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-    textContent += `👑 럭셔리: ${scores.luxury}\n`;
-    textContent += `🐠 수중환경: ${scores.underwater}\n`;
-    textContent += `💙 라군: ${scores.lagoon}\n`;
-    textContent += `🍽️ 음식: ${scores.food}\n`;
-    textContent += `🏄 액티비티: ${scores.activity}\n`;
-    textContent += `💰 가성비: ${scores.budget}\n\n`;
 
     // 매칭된 성향 타입
     textContent += "🎯 매칭된 성향 타입\n";
@@ -133,9 +115,14 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
 
     textContent +=
       "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-    textContent += "Made with 💙 for Maldives Lovers\n";
+    textContent += "💬 결과를 공유하고 여행 동반자와 함께 상의해보세요!\n";
     textContent +=
-      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
+      "여러분의 선택을 비교하며 더 나은 몰디브 여행을 계획할 수 있습니다.\n";
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+    textContent += "© 2025 몰디브 매치 (Maldives Match)\n";
+    textContent += "개발자: AshLight (ashlight2510@gmail.com)\n";
+    textContent += "Made with 💙 for Maldives Lovers\n";
 
     // 파일 다운로드
     const blob = new Blob([textContent], { type: "text/plain;charset=utf-8" });
@@ -350,6 +337,72 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
             다운로드 파일에는 선택한 모든 질문과 답변이 포함됩니다
           </p>
         </div>
+
+        {/* 공유 안내 */}
+        <div className="bg-white/90 backdrop-blur-sm rounded-3xl shadow-xl p-6 md:p-8 mb-6 text-center">
+          <div className="text-4xl mb-4">💬</div>
+          <h3 className="text-xl font-bold text-gray-800 mb-3">
+            결과를 공유하고 여행 동반자와 함께 상의해보세요!
+          </h3>
+          <p className="text-gray-600 leading-relaxed">
+            여러분의 선택을 비교하며 더 나은 몰디브 여행을 계획할 수 있습니다.
+            <br />
+            텍스트 파일을 다운로드하여 함께 공유해보세요.
+          </p>
+        </div>
+
+        {/* 후원 카드 */}
+        <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
+          <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
+            ☕ 개발자에게 커피한잔 사주기
+          </h3>
+          <p className="text-gray-600 text-center mb-6 leading-relaxed">
+            이 서비스는 개인 비용으로 서버와 도메인을 유지하며 운영되고
+            있습니다.
+            <br />
+            지속적인 개선과 유지보수를 위해 작은 후원이 큰 도움이 됩니다.
+            <br />
+            잠시 멈춰 주신 관심에 감사드립니다.
+          </p>
+          <div className="flex flex-col items-center gap-4">
+            <div className="bg-gray-50 p-4 rounded-2xl">
+              <img
+                src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://qr.kakaopay.com/FQrDWYNo2&margin=2"
+                alt="카카오페이 QR 코드"
+                className="w-48 h-48 mx-auto"
+              />
+              <p className="text-center text-gray-600 mt-2">🙏 감사합니다</p>
+            </div>
+            <a
+              href="https://qr.kakaopay.com/FQrDWYNo2"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-6 py-3 rounded-full font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
+            >
+              📱 카카오페이로 커피사주기
+            </a>
+          </div>
+        </div>
+
+        {/* Footer */}
+        <footer className="text-center py-6 text-white/80">
+          <p>
+            © 2025{" "}
+            <a
+              href="mailto:ashlight2510@gmail.com"
+              className="text-white/80 hover:text-white transition-colors duration-200 underline"
+            >
+              몰디브 매치 (Maldives Match)
+            </a>
+            {" - "}
+            <a
+              href="mailto:ashlight2510@gmail.com"
+              className="text-white/80 hover:text-white transition-colors duration-200"
+            >
+              AshLight
+            </a>
+          </p>
+        </footer>
       </div>
     </div>
   );
