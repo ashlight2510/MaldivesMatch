@@ -1,14 +1,44 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
+const basePath = process.env.NODE_ENV === 'production' ? '/MaldivesMatch' : '';
+const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maldives.emojicon.site/MaldivesMatch";
+const ogImageUrl = `${siteUrl}/og-image.svg`;
+
 export const metadata: Metadata = {
   title: "몰디브 매치 - 나의 몰디브 성향 찾기",
   description:
     "18개의 전문 질문으로 나에게 맞는 몰디브 여행 스타일을 찾아보세요",
   icons: {
-    icon: "/icon.svg",
-    shortcut: "/icon.svg",
-    apple: "/icon.svg",
+    icon: `${basePath}/icon.svg`,
+    shortcut: `${basePath}/icon.svg`,
+    apple: `${basePath}/icon.svg`,
+  },
+  openGraph: {
+    title: "몰디브 매치 - 나의 몰디브 성향 찾기",
+    description: "나에게 딱 맞는 몰디브 여행 스타일을 찾아보세요! 8가지 성향 타입 중 당신의 스타일을 알아보고 맞춤 리조트를 추천받으세요.",
+    url: siteUrl,
+    siteName: "몰디브 매치",
+    images: [
+      {
+        url: ogImageUrl,
+        width: 1200,
+        height: 630,
+        alt: "몰디브 매치 - 나의 몰디브 성향 찾기",
+      },
+    ],
+    locale: "ko_KR",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "몰디브 매치 - 나의 몰디브 성향 찾기",
+    description: "나에게 딱 맞는 몰디브 여행 스타일을 찾아보세요!",
+    images: [ogImageUrl],
+  },
+  other: {
+    "og:image:type": "image/svg+xml",
+    "og:image:secure_url": ogImageUrl,
   },
 };
 
