@@ -362,7 +362,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
             <br />
             지속적인 개선과 유지보수를 위해 작은 후원이 큰 도움이 됩니다.
             <br />
-            잠시 멈춰 주신 관심에 감사드립니다.
+            소중한 관심에 감사드립니다.
           </p>
           <div className="flex flex-col items-center gap-4">
             <div className="bg-gray-50 p-4 rounded-2xl">
