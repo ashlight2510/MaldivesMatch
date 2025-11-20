@@ -151,6 +151,18 @@ export default function Home() {
       })
       .sort((a, b) => b.similarity - a.similarity);
 
+    // 선택한 답변 정보 저장 (먼저 생성)
+    const selectedAnswers = userAnswers.map((answerIndex, questionIndex) => {
+      const question = questions[questionIndex];
+      const selectedOption = question.options[answerIndex];
+      return {
+        questionId: question.id,
+        question: question.question,
+        selectedOption: selectedOption.text,
+        scores: selectedOption.scores,
+      };
+    });
+
     const topTraitIds = new Set(
       topTraits.map((trait) => traitToTypeId[trait.key])
     );
@@ -166,6 +178,7 @@ export default function Home() {
           scores: normalizedScores,
           topTraits,
           rankedTypes: typeRankings,
+          selectedAnswers, // selectedAnswers 포함
         });
         return;
       }
@@ -211,18 +224,6 @@ export default function Home() {
       );
     });
     console.log("\n");
-
-    // 선택한 답변 정보 저장
-    const selectedAnswers = userAnswers.map((answerIndex, questionIndex) => {
-      const question = questions[questionIndex];
-      const selectedOption = question.options[answerIndex];
-      return {
-        questionId: question.id,
-        question: question.question,
-        selectedOption: selectedOption.text,
-        scores: selectedOption.scores,
-      };
-    });
 
     setResult({
       personalityTypes: resolvedMatches,
