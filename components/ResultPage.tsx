@@ -73,17 +73,21 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
     textContent +=
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
 
-    // 선택한 질문과 답변
-    if (selectedAnswers && selectedAnswers.length > 0) {
-      textContent += "📋 선택한 질문과 답변\n";
-      textContent +=
-        "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
+    // 선택한 질문과 답변 (항상 포함)
+    textContent += "📋 선택한 질문과 답변\n";
+    textContent +=
+      "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
 
+    if (selectedAnswers && selectedAnswers.length > 0) {
       selectedAnswers.forEach((answer, index) => {
         textContent += `${index + 1}. ${answer.question}\n`;
         textContent += `   ✅ 선택: ${answer.selectedOption}\n\n`;
       });
+    } else {
+      textContent += "선택한 답변이 없습니다.\n\n";
     }
+
+    textContent += "\n";
 
     // 매칭된 성향 타입
     textContent += "🎯 매칭된 성향 타입\n";
@@ -100,7 +104,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
       type.characteristics.forEach((char) => {
         textContent += `   - ${char}\n`;
       });
-      textContent += `\n   추천 리조트: ${type.resortRecommendation}\n\n`;
+      textContent += `\n   ${type.resortRecommendation}\n\n`;
     });
 
     // 전체 성향 타입 순위
@@ -115,9 +119,10 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
 
     textContent +=
       "\n━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n";
-    textContent += "💬 결과를 공유하고 여행 동반자와 함께 상의해보세요!\n";
+    textContent += "💬 이 결과를 공유하고 여행 동반자와 함께 상의해보세요!\n";
+    textContent += "위에 표시된 '선택한 질문과 답변'을 비교하며\n";
     textContent +=
-      "여러분의 선택을 비교하며 더 나은 몰디브 여행을 계획할 수 있습니다.\n";
+      "서로의 선호도를 확인하고 더 나은 몰디브 여행을 계획할 수 있습니다.\n";
     textContent +=
       "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━\n\n";
     textContent += "© 2025 몰디브 매치 (Maldives Match)\n";
