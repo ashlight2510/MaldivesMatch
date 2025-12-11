@@ -257,7 +257,7 @@ export default function Home() {
               나의 몰디브 여행 성향 찾기
             </p>
             <p className="text-gray-500">
-              18개의 전문 질문으로 나에게 딱 맞는 몰디브 스타일을 찾아보세요!
+              12개의 전문 질문으로 나에게 딱 맞는 몰디브 스타일을 찾아보세요!
             </p>
             <p className="text-sm text-gray-400 mt-2">⏱️ 소요 시간: 약 3-5분</p>
           </div>
