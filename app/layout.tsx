@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import "./globals.css";
 
-const basePath = process.env.NODE_ENV === 'production' ? '/MaldivesMatch' : '';
-const siteUrl = process.env.NEXT_PUBLIC_SITE_URL || "https://maldives.emojicon.site/MaldivesMatch";
+const isProd = process.env.NODE_ENV === 'production'
+const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (isProd ? '/MaldivesMatch' : '')
+const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://maldives.emojicon.site'
+const siteUrl = `${siteOrigin}${basePath}`
 const ogImageUrl = `${siteUrl}/og-image.svg`;
 
 export const metadata: Metadata = {

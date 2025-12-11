@@ -97,6 +97,9 @@ npm run build
 
 빌드된 파일은 `out` 폴더에 생성됩니다.
 
+> 커스텀 도메인에서 `/MaldivesMatch` 접두사가 필요 없으면  
+> `NEXT_PUBLIC_BASE_PATH=""` 환경변수를 지정한 뒤 빌드하세요.
+
 ## 📦 GitHub Pages 배포
 
 ### 1. GitHub 저장소 생성 및 푸시
