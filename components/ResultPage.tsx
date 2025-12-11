@@ -1,5 +1,6 @@
 "use client";
 
+import { useEffect } from "react";
 import { TestResult, TraitKey } from "@/types";
 import RadarChart from "./RadarChart";
 
@@ -58,6 +59,24 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
   if (!primaryType) {
     return null;
   }
+
+  useEffect(() => {
+    if (typeof document === "undefined") return;
+    const scriptId = "kakao-adfit-script";
+    if (!document.getElementById(scriptId)) {
+      const script = document.createElement("script");
+      script.id = scriptId;
+      script.async = true;
+      script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
+      document.body.appendChild(script);
+    } else {
+      const adfit = (window as unknown as { kakaoAdFit?: { reload?: () => void } })
+        .kakaoAdFit;
+      if (adfit && typeof adfit.reload === "function") {
+        adfit.reload();
+      }
+    }
+  }, []);
 
   const handleDownloadText = () => {
     const now = new Date();
@@ -356,37 +375,20 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
           </p>
         </div>
 
-        {/* 후원 카드 */}
-        <div className="bg-white rounded-3xl shadow-2xl p-6 md:p-8 mb-6">
-          <h3 className="text-xl font-bold text-gray-800 mb-3 text-center">
-            ☕ 개발자에게 커피한잔 사주기
-          </h3>
-          <p className="text-gray-600 text-center mb-6 leading-relaxed">
-            이 서비스는 개인 비용으로 서버와 도메인을 유지하며 운영되고
-            있습니다.
-            <br />
-            지속적인 개선과 유지보수를 위해 작은 후원이 큰 도움이 됩니다.
-            <br />
-            소중한 관심에 감사드립니다.
-          </p>
-          <div className="flex flex-col items-center gap-4">
-            <div className="bg-gray-50 p-4 rounded-2xl">
-              <img
-                src="https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=https://qr.kakaopay.com/FQrDWYNo2&margin=2"
-                alt="카카오페이 QR 코드"
-                className="w-48 h-48 mx-auto"
-              />
-              <p className="text-center text-gray-600 mt-2">🙏 감사합니다</p>
-            </div>
-            <a
-              href="https://qr.kakaopay.com/FQrDWYNo2"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-yellow-400 hover:bg-yellow-500 text-gray-800 px-6 py-3 rounded-full font-semibold transition-all duration-200 shadow-md hover:shadow-lg"
-            >
-              📱 카카오페이로 커피사주기
-            </a>
-          </div>
+        {/* 광고 카드 */}
+        <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 mb-6 flex justify-center">
+          <ins
+            className="kakao_ad_area"
+            style={{
+              display: "block",
+              width: "100%",
+              maxWidth: 336,
+              minHeight: 280,
+            }}
+            data-ad-unit="DAN-2YxsNAvgD2nKdkte"
+            data-ad-width="300"
+            data-ad-height="250"
+          ></ins>
         </div>
 
         {/* Footer */}
