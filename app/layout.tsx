@@ -55,7 +55,7 @@ export default function RootLayout({
       <head>
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1204894220949193" crossOrigin="anonymous"></script>
       </head>
-      <body>
+      <body>{children}
       <div className="adsense-block" style={{ margin: '16px 0', textAlign: 'center' }}>
         <ins
           className="adsbygoogle"
@@ -69,7 +69,7 @@ export default function RootLayout({
       <Script id="adsbygoogle-init" strategy="afterInteractive">
         {`(adsbygoogle = window.adsbygoogle || []).push({});`}
       </Script>
-{children}</body>
+</body>
     </html>
   );
 }
