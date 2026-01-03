@@ -1,6 +1,5 @@
 "use client";
 
-import { useEffect } from "react";
 import { TestResult, TraitKey } from "@/types";
 import RadarChart from "./RadarChart";
 
@@ -59,24 +58,6 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
   if (!primaryType) {
     return null;
   }
-
-  useEffect(() => {
-    if (typeof document === "undefined") return;
-    const scriptId = "kakao-adfit-script";
-    if (!document.getElementById(scriptId)) {
-      const script = document.createElement("script");
-      script.id = scriptId;
-      script.async = true;
-      script.src = "//t1.daumcdn.net/kas/static/ba.min.js";
-      document.body.appendChild(script);
-    } else {
-      const adfit = (window as unknown as { kakaoAdFit?: { reload?: () => void } })
-        .kakaoAdFit;
-      if (adfit && typeof adfit.reload === "function") {
-        adfit.reload();
-      }
-    }
-  }, []);
 
   const handleDownloadText = () => {
     const now = new Date();
@@ -377,19 +358,7 @@ export default function ResultPage({ result, onReset }: ResultPageProps) {
 
         {/* 광고 카드 */}
         <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 mb-6 flex justify-center">
-          <ins
-            className="kakao_ad_area"
-            style={{
-              display: "block",
-              width: "100%",
-              maxWidth: 336,
-              minHeight: 280,
-            }}
-            data-ad-unit="DAN-2YxsNAvgD2nKdkte"
-            data-ad-width="300"
-            data-ad-height="250"
-          ></ins>
-        </div>
+          </div>
 
         {/* Footer */}
         <footer className="text-center py-6 text-white/80">
