@@ -4,7 +4,7 @@ import Script from 'next/script'
 
 const isProd = process.env.NODE_ENV === 'production'
 const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (isProd ? '/MaldivesMatch' : '')
-const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://maldives.emojicon.site'
+const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://maldives.funnyfunny.cloud'
 const siteUrl = `${siteOrigin}${basePath}`
 const ogImageUrl = `${siteUrl}/og-image.svg`;
 
@@ -56,10 +56,13 @@ export default function RootLayout({
         <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-1204894220949193" crossOrigin="anonymous"></script>
       </head>
       <body>{children}
-      <div className="adsense-block" style={{ margin: '16px 0', textAlign: 'center' }}>
+      <div
+        className="adsense-block"
+        style={{ margin: '16px 0', display: 'flex', justifyContent: 'center' }}
+      >
         <ins
           className="adsbygoogle"
-          style={{ display: 'block' }}
+          style={{ display: 'block', margin: '0 auto' }}
           data-ad-format="fluid"
           data-ad-layout-key="-6t+ed+2i-1n-4w"
           data-ad-client="ca-pub-1204894220949193"
