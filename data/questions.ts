@@ -4,9 +4,11 @@ export const questions: Question[] = [
   {
     id: 1,
     question: "💰 예산 전략은 어떻게 잡고 있어?",
+    questionEn: "💰 What's your budget strategy?",
     options: [
       {
         text: "1인 $2,000 이하 - 필수 경험만 챙길래",
+        textEn: "Under $2,000 per person - Only essential experiences",
         scores: {
           luxury: 3,
           underwater: 6,
@@ -18,6 +20,7 @@ export const questions: Question[] = [
       },
       {
         text: "1인 $2,000~$3,500 - 가격 대비 만족을 노려",
+        textEn: "$2,000~$3,500 per person - Seeking value for money",
         scores: {
           luxury: 5,
           underwater: 6,
@@ -29,6 +32,7 @@ export const questions: Question[] = [
       },
       {
         text: "1인 $3,500~$5,000 - 필요한 건 투자할래",
+        textEn: "$3,500~$5,000 per person - Willing to invest in what matters",
         scores: {
           luxury: 7,
           underwater: 7,
@@ -40,6 +44,7 @@ export const questions: Question[] = [
       },
       {
         text: "1인 $5,000 이상 - 최상위 옵션만 보고 있어",
+        textEn: "Over $5,000 per person - Only looking at premium options",
         scores: {
           luxury: 10,
           underwater: 7,
@@ -54,9 +59,11 @@ export const questions: Question[] = [
   {
     id: 2,
     question: "🎬 이번 여행에서 가장 먼저 떠오르는 장면은?",
+    questionEn: "🎬 What's the first scene that comes to mind for this trip?",
     options: [
       {
         text: "완벽한 프라이버시와 힐링 - 풀빌라에서 휴식",
+        textEn: "Perfect privacy and healing - Resting in a pool villa",
         scores: {
           luxury: 10,
           underwater: 4,
@@ -68,6 +75,7 @@ export const questions: Question[] = [
       },
       {
         text: "만타레이와 하우스리프를 탐험하는 순간",
+        textEn: "Exploring manta rays and house reefs",
         scores: {
           luxury: 5,
           underwater: 10,
@@ -79,6 +87,7 @@ export const questions: Question[] = [
       },
       {
         text: "티파니색 라군에서 찍는 감성 사진",
+        textEn: "Taking aesthetic photos in Tiffany blue lagoon",
         scores: {
           luxury: 7,
           underwater: 3,
@@ -90,6 +99,7 @@ export const questions: Question[] = [
       },
       {
         text: "셰프 테이스팅과 와인 페어링 디너",
+        textEn: "Chef's tasting menu with wine pairing dinner",
         scores: {
           luxury: 8,
           underwater: 4,
@@ -104,9 +114,11 @@ export const questions: Question[] = [
   {
     id: 3,
     question: "🌊 수중 컨디션 vs 라군(바다 색), 어디에 더 끌려?",
+    questionEn: "🌊 Underwater conditions vs Lagoon (sea color), which attracts you more?",
     options: [
       {
         text: "수중 9 : 라군 1 - 하우스리프가 최우선",
+        textEn: "Underwater 9 : Lagoon 1 - House reef is top priority",
         scores: {
           luxury: 4,
           underwater: 10,
@@ -118,6 +130,7 @@ export const questions: Question[] = [
       },
       {
         text: "수중 7 : 라군 3 - 다이빙/스노클 중심",
+        textEn: "Underwater 7 : Lagoon 3 - Diving/snorkeling focused",
         scores: {
           luxury: 5,
           underwater: 8,
@@ -129,6 +142,7 @@ export const questions: Question[] = [
       },
       {
         text: "수중 4 : 라군 6 - 둘 다 균형 있게",
+        textEn: "Underwater 4 : Lagoon 6 - Balanced for both",
         scores: {
           luxury: 6,
           underwater: 5,
@@ -140,6 +154,7 @@ export const questions: Question[] = [
       },
       {
         text: "수중 2 : 라군 8 - 뷰/사진이 핵심",
+        textEn: "Underwater 2 : Lagoon 8 - View/photos are key",
         scores: {
           luxury: 8,
           underwater: 3,
@@ -154,9 +169,11 @@ export const questions: Question[] = [
   {
     id: 4,
     question: "🏡 어떤 숙소 타입이 가장 설렌다?",
+    questionEn: "🏡 Which accommodation type excites you most?",
     options: [
       {
         text: "완전 프라이빗한 풀빌라와 실내 편의시설",
+        textEn: "Fully private pool villa with indoor amenities",
         scores: {
           luxury: 10,
           underwater: 4,
@@ -168,6 +185,7 @@ export const questions: Question[] = [
       },
       {
         text: "워터빌라 + 인피니티 데크, 라군뷰 필수",
+        textEn: "Water villa + infinity deck, lagoon view essential",
         scores: {
           luxury: 8,
           underwater: 5,
@@ -179,6 +197,7 @@ export const questions: Question[] = [
       },
       {
         text: "비치빌라에 나가면 바로 하우스리프",
+        textEn: "Beach villa with immediate access to house reef",
         scores: {
           luxury: 6,
           underwater: 9,
@@ -190,6 +209,7 @@ export const questions: Question[] = [
       },
       {
         text: "기본 객실이라도 위치/동선이 효율적이면 OK",
+        textEn: "Basic room is OK if location/flow is efficient",
         scores: {
           luxury: 4,
           underwater: 6,
@@ -204,9 +224,11 @@ export const questions: Question[] = [
   {
     id: 5,
     question: "🍽️ 식사와 음료는 어떤 방식이 좋아?",
+    questionEn: "🍽️ What dining style do you prefer?",
     options: [
       {
         text: "조식만 포함, 나머지는 자유롭게 찾아다닐래",
+        textEn: "Breakfast only, explore other meals freely",
         scores: {
           luxury: 4,
           underwater: 6,
@@ -218,6 +240,7 @@ export const questions: Question[] = [
       },
       {
         text: "HB(조+석)으로 편하게, 필요하면 업그레이드",
+        textEn: "HB (breakfast + dinner) for convenience, upgrade if needed",
         scores: {
           luxury: 6,
           underwater: 6,
@@ -229,6 +252,7 @@ export const questions: Question[] = [
       },
       {
         text: "풀보드/세트 메뉴로 끼니 걱정 없이",
+        textEn: "Full board/set menus for worry-free meals",
         scores: {
           luxury: 7,
           underwater: 5,
@@ -240,6 +264,7 @@ export const questions: Question[] = [
       },
       {
         text: "프리미엄 올인클루시브 + 와인 페어링",
+        textEn: "Premium all-inclusive + wine pairing",
         scores: {
           luxury: 9,
           underwater: 4,
@@ -254,9 +279,11 @@ export const questions: Question[] = [
   {
     id: 6,
     question: "⚡ 하루 루틴은 어느 정도가 좋아?",
+    questionEn: "⚡ What's your ideal daily routine?",
     options: [
       {
         text: "느긋하게 쉬고 스파/독서 위주",
+        textEn: "Leisurely relaxation with spa/reading",
         scores: {
           luxury: 8,
           underwater: 4,
@@ -268,6 +295,7 @@ export const questions: Question[] = [
       },
       {
         text: "오전엔 체험, 오후엔 휴식으로 균형",
+        textEn: "Morning activities, afternoon rest - balanced",
         scores: {
           luxury: 6,
           underwater: 7,
@@ -279,6 +307,7 @@ export const questions: Question[] = [
       },
       {
         text: "하루 종일 액티비티로 채울래",
+        textEn: "Fill the whole day with activities",
         scores: {
           luxury: 5,
           underwater: 8,
@@ -290,6 +319,7 @@ export const questions: Question[] = [
       },
       {
         text: "비용 아끼며 핵심 몇 가지만 즐길래",
+        textEn: "Save costs and enjoy just a few key things",
         scores: {
           luxury: 4,
           underwater: 6,
@@ -304,9 +334,11 @@ export const questions: Question[] = [
   {
     id: 7,
     question: "✈️ 말레에서 리조트까지 이동은?",
+    questionEn: "✈️ Transportation from Male to resort?",
     options: [
       {
         text: "스피드보트로 빠르고 경제적으로",
+        textEn: "Speedboat - fast and economical",
         scores: {
           luxury: 4,
           underwater: 6,
@@ -318,6 +350,7 @@ export const questions: Question[] = [
       },
       {
         text: "국내선 + 보트, 이동시간 감수 가능",
+        textEn: "Domestic flight + boat, OK with travel time",
         scores: {
           luxury: 6,
           underwater: 6,
@@ -329,6 +362,7 @@ export const questions: Question[] = [
       },
       {
         text: "수상비행기 타고 전경을 즐기고 싶어",
+        textEn: "Seaplane to enjoy the scenic views",
         scores: {
           luxury: 9,
           underwater: 7,
@@ -340,6 +374,7 @@ export const questions: Question[] = [
       },
       {
         text: "프라이빗 차터/전세 이동이 좋아",
+        textEn: "Private charter/exclusive transfer preferred",
         scores: {
           luxury: 10,
           underwater: 6,
@@ -354,9 +389,11 @@ export const questions: Question[] = [
   {
     id: 8,
     question: "🛎 서비스 스타일에 대한 기대는?",
+    questionEn: "🛎 What are your service expectations?",
     options: [
       {
         text: "버틀러, 맞춤 컨시어지, 소수정예",
+        textEn: "Butler, personalized concierge, exclusive small groups",
         scores: {
           luxury: 10,
           underwater: 5,
@@ -368,6 +405,7 @@ export const questions: Question[] = [
       },
       {
         text: "세련된 5성급 표준 서비스",
+        textEn: "Sophisticated 5-star standard service",
         scores: {
           luxury: 8,
           underwater: 6,
@@ -379,6 +417,7 @@ export const questions: Question[] = [
       },
       {
         text: "친근하고 실용적인 스태프면 충분",
+        textEn: "Friendly and practical staff is enough",
         scores: {
           luxury: 6,
           underwater: 6,
@@ -390,6 +429,7 @@ export const questions: Question[] = [
       },
       {
         text: "DIY/셀프 서비스, 자유도가 좋아",
+        textEn: "DIY/self-service, prefer freedom",
         scores: {
           luxury: 4,
           underwater: 6,
@@ -404,9 +444,11 @@ export const questions: Question[] = [
   {
     id: 9,
     question: "🌙 저녁 시간을 어떻게 보내고 싶어?",
+    questionEn: "🌙 How do you want to spend your evenings?",
     options: [
       {
         text: "별 감상과 프라이빗 다이닝",
+        textEn: "Stargazing and private dining",
         scores: {
           luxury: 9,
           underwater: 5,
@@ -418,6 +460,7 @@ export const questions: Question[] = [
       },
       {
         text: "선셋 크루즈 + 포토 타임",
+        textEn: "Sunset cruise + photo time",
         scores: {
           luxury: 7,
           underwater: 5,
@@ -429,6 +472,7 @@ export const questions: Question[] = [
       },
       {
         text: "바/와인셀러, 셰프 테이스팅",
+        textEn: "Bar/wine cellar, chef's tasting",
         scores: {
           luxury: 8,
           underwater: 4,
@@ -440,6 +484,7 @@ export const questions: Question[] = [
       },
       {
         text: "밤낚시, 나이트 스노클 같은 액티비티",
+        textEn: "Night fishing, night snorkeling activities",
         scores: {
           luxury: 5,
           underwater: 9,
@@ -454,9 +499,11 @@ export const questions: Question[] = [
   {
     id: 10,
     question: "📍 추가로 꼭 투자하고 싶은 포인트는?",
+    questionEn: "📍 What's a must-invest point for you?",
     options: [
       {
         text: "객실 인테리어와 편의시설 업그레이드",
+        textEn: "Room interior and amenities upgrade",
         scores: {
           luxury: 10,
           underwater: 5,
@@ -468,6 +515,7 @@ export const questions: Question[] = [
       },
       {
         text: "다이빙 장비/가이드, 해양 워크샵",
+        textEn: "Diving equipment/guide, marine workshops",
         scores: {
           luxury: 5,
           underwater: 10,
@@ -479,6 +527,7 @@ export const questions: Question[] = [
       },
       {
         text: "전문 포토그래퍼와 라군 촬영",
+        textEn: "Professional photographer for lagoon photos",
         scores: {
           luxury: 7,
           underwater: 4,
@@ -490,6 +539,7 @@ export const questions: Question[] = [
       },
       {
         text: "체류일수 연장 + 가성비 플랜 유지",
+        textEn: "Extend stay + maintain value plan",
         scores: {
           luxury: 4,
           underwater: 6,
@@ -504,9 +554,11 @@ export const questions: Question[] = [
   {
     id: 11,
     question: "🎒 반드시 포함하고 싶은 액티비티 패키지는?",
+    questionEn: "🎒 Which activity package must be included?",
     options: [
       {
         text: "시그니처 스파·요가·사운드 힐링",
+        textEn: "Signature spa, yoga, sound healing",
         scores: {
           luxury: 9,
           underwater: 4,
@@ -518,6 +570,7 @@ export const questions: Question[] = [
       },
       {
         text: "만타레이 익스커션과 딥 다이빙",
+        textEn: "Manta ray excursion and deep diving",
         scores: {
           luxury: 5,
           underwater: 10,
@@ -529,6 +582,7 @@ export const questions: Question[] = [
       },
       {
         text: "제트스키, 서핑, 워터스포츠 풀패키지",
+        textEn: "Jet ski, surfing, full watersports package",
         scores: {
           luxury: 6,
           underwater: 7,
@@ -540,6 +594,7 @@ export const questions: Question[] = [
       },
       {
         text: "선셋 크루즈 + 로컬 체험, 합리적 패키지",
+        textEn: "Sunset cruise + local experience, reasonable package",
         scores: {
           luxury: 5,
           underwater: 6,
@@ -554,9 +609,11 @@ export const questions: Question[] = [
   {
     id: 12,
     question: "👥 동행 스타일은 어떤가요?",
+    questionEn: "👥 What's your travel companion style?",
     options: [
       {
         text: "허니문/커플 - 로맨스 집중",
+        textEn: "Honeymoon/couple - Romance focused",
         scores: {
           luxury: 9,
           underwater: 4,
@@ -568,6 +625,7 @@ export const questions: Question[] = [
       },
       {
         text: "가족/아이 동반 - 모두 편안해야",
+        textEn: "Family/children - Everyone must be comfortable",
         scores: {
           luxury: 6,
           underwater: 6,
@@ -579,6 +637,7 @@ export const questions: Question[] = [
       },
       {
         text: "친구/모험 메이트 - 액티비티 위주",
+        textEn: "Friends/adventure mates - Activity focused",
         scores: {
           luxury: 5,
           underwater: 8,
@@ -590,6 +649,7 @@ export const questions: Question[] = [
       },
       {
         text: "1인 혹은 자유 여행 - 효율과 가성비",
+        textEn: "Solo or free travel - Efficiency and value",
         scores: {
           luxury: 4,
           underwater: 7,

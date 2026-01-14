@@ -4,9 +4,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "luxury-healing",
     name: "럭셔리 힐링형",
+    nameEn: "Luxury Healing Type",
     emoji: "👑",
     description:
       "최고급 시설에서 완벽한 휴식을 즐기는 당신! 개인 풀빌라에서 샴페인 한 잔과 함께 석양을 감상하는 것이 로망입니다. 가격보다는 경험과 서비스의 질을 우선시하며, 프라이빗하고 럭셔리한 환경을 추구합니다.",
+    descriptionEn:
+      "You enjoy perfect relaxation in premium facilities! Your dream is to watch the sunset with a glass of champagne in a private pool villa. You prioritize experience and service quality over price, pursuing a private and luxurious environment.",
     characteristics: [
       "🏰 최고급 5성급 리조트만 선택",
       "🛁 개인 풀빌라 & 워터빌라 필수",
@@ -15,8 +18,18 @@ export const personalityTypes: PersonalityType[] = [
       "📸 완벽한 인테리어와 인스타 감성",
       "🌅 샌드뱅크, 언더워터 다이닝 등 특별 경험",
     ],
+    characteristicsEn: [
+      "🏰 Only premium 5-star resorts",
+      "🛁 Private pool villa & water villa essential",
+      "🍾 Michelin-level dining and wine",
+      "💆 Private spa and butler service",
+      "📸 Perfect interior and Instagram appeal",
+      "🌅 Special experiences like sandbank, underwater dining",
+    ],
     resortRecommendation:
       "💎 추천 리조트: 소네바자니, 소네바푸시, 식스센스라무, 벨라사루, 조아리, 콘래드, 세인트레지스, 원앤온리리띠라, 밀라이두, 파크하얏트",
+    resortRecommendationEn:
+      "💎 Recommended resorts: Soneva Jani, Soneva Fushi, Six Senses Laamu, Velassaru, Jaoali, Conrad, St. Regis, One&Only Reethi Rah, Milaidhoo, Park Hyatt",
     scores: {
       luxury: 95,
       underwater: 30,
@@ -29,9 +42,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "underwater-explorer",
     name: "수중 탐험가형",
+    nameEn: "Underwater Explorer Type",
     emoji: "🐠",
     description:
       "물 밖보다 물 속이 더 좋은 당신! 화려한 산호초와 다양한 해양생물을 만나는 것이 최고의 즐거움입니다. 하우스 리프가 좋은 리조트를 찾고, 매일 스노클링과 다이빙을 즐기며, 만타레이나 고래상어를 만나는 것을 꿈꿉니다.",
+    descriptionEn:
+      "You prefer the underwater world! Meeting colorful coral reefs and diverse marine life is your greatest joy. You look for resorts with great house reefs, enjoy daily snorkeling and diving, and dream of meeting manta rays and whale sharks.",
     characteristics: [
       "🤿 하우스 리프 필수 (비치 앞 산호초)",
       "🐢 매일 스노클링/다이빙 삼매경",
@@ -40,8 +56,18 @@ export const personalityTypes: PersonalityType[] = [
       "💰 하우스 리프 좋으면 가성비도 고려",
       "📷 수중 카메라는 필수템",
     ],
+    characteristicsEn: [
+      "🤿 House reef essential (coral reef in front of beach)",
+      "🐢 Daily snorkeling/diving immersion",
+      "🦈 Meeting manta rays, whale sharks, turtles",
+      "🏊 PADI diving center important",
+      "💰 Consider value if house reef is good",
+      "📷 Underwater camera is essential",
+    ],
     resortRecommendation:
       "🐠 추천 리조트: 릴리비치, 피히스트시아, 에라이두, 말라히니코두, 반얀트리방갈리, 아난타라키하바, 아다란프레스티지와두, 에메랄드",
+    resortRecommendationEn:
+      "🐠 Recommended resorts: Lily Beach, Fihalhohi, Eriyadu, Malahini Kuda Bandos, Banyan Tree Vabbinfaru, Anantara Kihavah, Adaraan Prestige Vadoo, Emerald",
     scores: {
       luxury: 40,
       underwater: 95,
@@ -54,9 +80,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "lagoon-romantic",
     name: "라군 낭만형",
+    nameEn: "Lagoon Romantic Type",
     emoji: "💙",
     description:
       "에메랄드빛 라군과 하얀 백사장이 최고! 인스타 감성 가득한 사진과 로맨틱한 분위기를 사랑합니다. 바다 색깔이 예쁜 곳, 워터빌라에서 바라보는 석양, 샌드뱅크 피크닉 등 감성적인 순간들을 추구합니다.",
+    descriptionEn:
+      "Emerald lagoon and white sandy beaches are the best! You love Instagram-worthy photos and romantic atmosphere. You pursue emotional moments like beautiful sea colors, sunsets from water villas, and sandbank picnics.",
     characteristics: [
       "🏖️ 완벽한 라군 색깔 (티파니 블루)",
       "📷 포토제닉한 환경 - 인스타 필수",
@@ -65,8 +94,18 @@ export const personalityTypes: PersonalityType[] = [
       "🏨 모던하고 세련된 인테리어",
       "🥂 샌드뱅크 프라이빗 디너",
     ],
+    characteristicsEn: [
+      "🏖️ Perfect lagoon color (Tiffany blue)",
+      "📷 Photogenic environment - Instagram essential",
+      "🌅 Sunset viewing from water villa",
+      "💑 Romantic honeymoon atmosphere",
+      "🏨 Modern and sophisticated interior",
+      "🥂 Sandbank private dinner",
+    ],
     resortRecommendation:
       "💙 추천 리조트: 밀라이두, 피넥쉬, 칸두마, 벨라사루, 오브루셀렉트생히리, 노쿠, 조아리, 후라발리, 반얀트리방갈리",
+    resortRecommendationEn:
+      "💙 Recommended resorts: Milaidhoo, Finolhu, Kandolhu, Velassaru, OBLU Select Sangeli, Noku, Jaoali, Furaveri, Banyan Tree Vabbinfaru",
     scores: {
       luxury: 75,
       underwater: 25,
@@ -79,9 +118,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "value-seeker",
     name: "가성비 실속형",
+    nameEn: "Value Seeker Type",
     emoji: "💰",
     description:
       "현명한 선택으로 알찬 여행을 만드는 당신! 합리적인 가격으로도 몰디브의 아름다움을 충분히 즐길 수 있습니다. 수중환경도 좋고, 음식도 괜찮고, 가격도 합리적인 밸런스 있는 리조트를 찾습니다.",
+    descriptionEn:
+      "You create fulfilling trips with wise choices! You can fully enjoy the beauty of Maldives at reasonable prices. You look for balanced resorts with good underwater environment, decent food, and reasonable prices.",
     characteristics: [
       "💵 1인 $2,000 이하로 알차게",
       "🎯 핵심만 챙기되 타협 없이",
@@ -90,8 +132,18 @@ export const personalityTypes: PersonalityType[] = [
       "🍽️ BB나 HB로 식비 조절",
       "🌊 하우스 리프 있으면 금상첨화",
     ],
+    characteristicsEn: [
+      "💵 Under $2,000 per person, packed with value",
+      "🎯 Cover only essentials without compromise",
+      "🚤 Speedboat transfer OK",
+      "🏊 Local resorts with good underwater environment",
+      "🍽️ Control food costs with BB or HB",
+      "🌊 House reef is a bonus",
+    ],
     resortRecommendation:
       "💰 추천 리조트: 아다란클럽란날리, 오브루벨리폴리, 메루, 칸두마, 에라이두, 말라히니코두, 비얏이, 센타라라스푸시",
+    resortRecommendationEn:
+      "💰 Recommended resorts: Adaaran Club Rannalhi, OBLU Helengeli, Meeru, Kandolhu, Eriyadu, Malahini Kuda Bandos, Biyadhoo, Centara Ras Fushi",
     scores: {
       luxury: 30,
       underwater: 70,
@@ -104,9 +156,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "foodie-allin",
     name: "미식 올인형",
+    nameEn: "Foodie All-In Type",
     emoji: "🍽️",
     description:
       "맛있는 음식과 술이 여행의 핵심! 올인클루시브로 무제한 다이닝과 바를 즐기는 것이 최고의 행복입니다. 다양한 레스토랑, 프리미엄 주류, 언더워터 레스토랑 등 미식 경험을 중시합니다.",
+    descriptionEn:
+      "Delicious food and drinks are the core of your trip! Your greatest happiness is enjoying unlimited dining and bars with all-inclusive. You value culinary experiences like diverse restaurants, premium drinks, and underwater restaurants.",
     characteristics: [
       "🍷 올인클루시브 필수",
       "🍹 프리미엄 무제한 칵테일",
@@ -115,8 +170,18 @@ export const personalityTypes: PersonalityType[] = [
       "👨‍🍳 유명 셰프의 특별 메뉴",
       "🌊 언더워터/오버워터 다이닝",
     ],
+    characteristicsEn: [
+      "🍷 All-inclusive essential",
+      "🍹 Premium unlimited cocktails",
+      "🍴 5+ diverse restaurants",
+      "🥂 Wine cellar and bar culture",
+      "👨‍🍳 Special menus from famous chefs",
+      "🌊 Underwater/overwater dining",
+    ],
     resortRecommendation:
       "🍽️ 추천 리조트: 쿠라마띠, 릴리비치, 오브루셀렉트생히리, 센타라그랜드, 아마리하보다, 노쿠, 벨라사루, 아난타라디구",
+    resortRecommendationEn:
+      "🍽️ Recommended resorts: Kuramathi, Lily Beach, OBLU Select Sangeli, Centara Grand, Amari Havodda, Noku, Velassaru, Anantara Dhigu",
     scores: {
       luxury: 75,
       underwater: 40,
@@ -129,9 +194,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "activity-adventurer",
     name: "액티비티 모험형",
+    nameEn: "Activity Adventurer Type",
     emoji: "🏄",
     description:
       "가만히 있기 힘든 활동적인 당신! 다양한 수상 스포츠와 액티비티로 매 순간을 즐깁니다. 스노클링, 다이빙, 서핑, 제트스키, 돌핀 크루즈 등 다양한 경험을 추구합니다.",
+    descriptionEn:
+      "You can't stay still! You enjoy every moment with various water sports and activities. You pursue diverse experiences like snorkeling, diving, surfing, jet skiing, and dolphin cruises.",
     characteristics: [
       "🏄 수상 스포츠 풀옵션",
       "🤿 다이빙 센터와 매일 다이빙",
@@ -140,8 +208,18 @@ export const personalityTypes: PersonalityType[] = [
       "⚡ 빡빡한 일정도 OK",
       "🌊 외부 투어 적극 참여",
     ],
+    characteristicsEn: [
+      "🏄 Full water sports options",
+      "🤿 Diving center and daily diving",
+      "🎣 Fishing, dolphin cruise, island tours",
+      "🚁 Seaplane tour experience",
+      "⚡ Tight schedules OK",
+      "🌊 Actively participate in external tours",
+    ],
     resortRecommendation:
       "🏄 추천 리조트: 오젠리저브볼리, 아난타라디구, 아난타라벨리, 씨야우펜후시, 메루, 센타라라스푸시, 쿠라마띠, 릴리비치",
+    resortRecommendationEn:
+      "🏄 Recommended resorts: OZEN Reserve Bolifushi, Anantara Dhigu, Anantara Veli, Coco Palm Dhuni Kolhu, Meeru, Centara Ras Fushi, Kuramathi, Lily Beach",
     scores: {
       luxury: 50,
       underwater: 80,
@@ -154,9 +232,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "honeymoon-romantic",
     name: "허니문 로맨틱형",
+    nameEn: "Honeymoon Romantic Type",
     emoji: "💕",
     description:
       "평생 한 번뿐인 신혼여행! 로맨틱한 순간들로 가득 채우고 싶은 당신. 워터빌라, 샌드뱅크 디너, 커플 스파, 선셋 크루즈 등 특별한 경험을 원합니다. 프라이버시와 낭만이 최우선입니다.",
+    descriptionEn:
+      "The once-in-a-lifetime honeymoon! You want to fill it with romantic moments. You desire special experiences like water villas, sandbank dinners, couple spas, and sunset cruises. Privacy and romance are top priorities.",
     characteristics: [
       "💑 완벽한 프라이버시",
       "🌅 워터빌라에서 석양 감상",
@@ -165,8 +246,18 @@ export const personalityTypes: PersonalityType[] = [
       "📸 평생 기억할 사진",
       "🛁 야외 욕조에서 샴페인",
     ],
+    characteristicsEn: [
+      "💑 Perfect privacy",
+      "🌅 Sunset viewing from water villa",
+      "🥂 Sandbank private dinner",
+      "💆 Couple spa & romantic package",
+      "📸 Photos to remember forever",
+      "🛁 Champagne in outdoor bathtub",
+    ],
     resortRecommendation:
       "💕 추천 리조트: 소네바, 콘래드, 세인트레지스, 벨라사루, 밀라이두, 조아리, 반얀트리방갈리, 노쿠, 파크하얏트",
+    resortRecommendationEn:
+      "💕 Recommended resorts: Soneva, Conrad, St. Regis, Velassaru, Milaidhoo, Jaoali, Banyan Tree Vabbinfaru, Noku, Park Hyatt",
     scores: {
       luxury: 90,
       underwater: 35,
@@ -179,9 +270,12 @@ export const personalityTypes: PersonalityType[] = [
   {
     id: "family-friendly",
     name: "가족 여행형",
+    nameEn: "Family-Friendly Type",
     emoji: "👨‍👩‍👧‍👦",
     description:
       "가족과 함께하는 소중한 시간! 아이들이 안전하게 놀 수 있는 얕은 라군, 키즈 클럽, 가족 친화적인 시설을 중시합니다. 모두가 즐길 수 있는 균형 잡힌 리조트를 찾습니다.",
+    descriptionEn:
+      "Precious time with family! You value shallow lagoons where children can play safely, kids clubs, and family-friendly facilities. You look for balanced resorts where everyone can enjoy.",
     characteristics: [
       "👶 키즈 클럽과 베이비시터",
       "🏊 얕은 라군 (아이들 안전)",
@@ -190,8 +284,18 @@ export const personalityTypes: PersonalityType[] = [
       "🎮 아이들 액티비티 프로그램",
       "💰 가성비도 고려",
     ],
+    characteristicsEn: [
+      "👶 Kids club and babysitter",
+      "🏊 Shallow lagoon (safe for children)",
+      "🍽️ Family-friendly restaurants",
+      "🏨 Family rooms or connecting rooms",
+      "🎮 Children's activity programs",
+      "💰 Also consider value",
+    ],
     resortRecommendation:
       "👨‍👩‍👧‍👦 추천 리조트: 쿠라마띠, 아마리하보다, 센타라그랜드, 하드락, 오브루셀렉트생히리, 칸두마, 아다란프레스티지",
+    resortRecommendationEn:
+      "👨‍👩‍👧‍👦 Recommended resorts: Kuramathi, Amari Havodda, Centara Grand, Hard Rock, OBLU Select Sangeli, Kandolhu, Adaaran Prestige",
     scores: {
       luxury: 60,
       underwater: 55,

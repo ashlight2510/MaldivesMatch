@@ -1,17 +1,26 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { questions } from "@/data/questions";
 import { personalityTypes } from "@/data/personalityTypes";
 import { TestResult, TraitKey } from "@/types";
 import QuestionCard from "@/components/QuestionCard";
 import ResultPage from "@/components/ResultPage";
+import LangSwitch from "@/components/LangSwitch";
+import { Language, detectLang, setLang } from "@/lib/i18n";
 
 export default function Home() {
   const [currentQuestion, setCurrentQuestion] = useState(0);
   const [answers, setAnswers] = useState<number[]>([]);
   const [result, setResult] = useState<TestResult | null>(null);
   const [isStarted, setIsStarted] = useState(false);
+  const [lang, setLangState] = useState<Language>("en");
+
+  useEffect(() => {
+    const detected = detectLang();
+    setLangState(detected);
+    setLang(detected);
+  }, []);
 
   const handleStart = () => {
     setIsStarted(true);
@@ -39,8 +48,8 @@ export default function Home() {
       const question = questions[questionIndex];
       const selectedOption = question.options[answerIndex];
 
-      console.log(`\n${questionIndex + 1}. ${question.question}`);
-      console.log(`   ✅ 선택: ${selectedOption.text}`);
+      console.log(`\n${questionIndex + 1}. ${getQuestionText(question)}`);
+      console.log(`   ✅ 선택: ${getOptionText(selectedOption)}`);
       console.log(`   📊 점수:`, {
         luxury: selectedOption.scores.luxury,
         underwater: selectedOption.scores.underwater,
@@ -157,8 +166,8 @@ export default function Home() {
       const selectedOption = question.options[answerIndex];
       return {
         questionId: question.id,
-        question: question.question,
-        selectedOption: selectedOption.text,
+        question: getQuestionText(question),
+        selectedOption: getOptionText(selectedOption),
         scores: selectedOption.scores,
       };
     });
@@ -242,29 +251,36 @@ export default function Home() {
   };
 
   if (result) {
-    return <ResultPage result={result} onReset={handleReset} />;
+    return <ResultPage result={result} onReset={handleReset} lang={lang} />;
   }
 
   if (!isStarted) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-300 flex items-center justify-center p-4">
+      <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-300 flex items-center justify-center p-4 relative">
+        <div className="fixed top-4 right-4 z-50">
+          <LangSwitch currentLang={lang} onLangChange={(l) => { setLang(l); setLangState(l); }} />
+        </div>
         <div className="max-w-2xl w-full bg-white rounded-3xl shadow-2xl p-8 md:p-12 text-center">
           <div className="mb-8">
             <h1 className="text-4xl md:text-5xl font-bold text-gray-800 mb-4">
-              🏝️ 몰디브 매치
+              🏝️ {lang === "en" ? "Maldives Match" : "몰디브 매치"}
             </h1>
             <p className="text-xl text-gray-600 mb-2">
-              나의 몰디브 여행 성향 찾기
+              {lang === "en" ? "Find Your Maldives Travel Style" : "나의 몰디브 여행 성향 찾기"}
             </p>
             <p className="text-gray-500">
-              12개의 전문 질문으로 나에게 딱 맞는 몰디브 스타일을 찾아보세요!
+              {lang === "en" 
+                ? "Find your perfect Maldives style with 12 expert questions!"
+                : "12개의 전문 질문으로 나에게 딱 맞는 몰디브 스타일을 찾아보세요!"}
             </p>
-            <p className="text-sm text-gray-400 mt-2">⏱️ 소요 시간: 약 3-5분</p>
+            <p className="text-sm text-gray-400 mt-2">
+              ⏱️ {lang === "en" ? "Duration: About 3-5 minutes" : "소요 시간: 약 3-5분"}
+            </p>
           </div>
 
           <div className="mb-8 p-6 bg-blue-50 rounded-2xl">
             <h2 className="text-lg font-semibold text-gray-800 mb-4">
-              🎯 8가지 몰디브 여행 성향
+              🎯 {lang === "en" ? "8 Maldives Travel Styles" : "8가지 몰디브 여행 성향"}
             </h2>
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {personalityTypes.map((type) => (
@@ -274,7 +290,7 @@ export default function Home() {
                 >
                   <div className="text-3xl mb-1">{type.emoji}</div>
                   <div className="text-sm font-medium text-gray-700">
-                    {type.name}
+                    {getPersonalityTypeName(type)}
                   </div>
                 </div>
               ))}
@@ -285,7 +301,7 @@ export default function Home() {
             onClick={handleStart}
             className="bg-gradient-to-r from-blue-500 to-cyan-500 text-white px-12 py-4 rounded-full text-lg font-semibold hover:from-blue-600 hover:to-cyan-600 transform hover:scale-105 transition-all duration-200 shadow-lg"
           >
-            시작하기 🚀
+            {lang === "en" ? "Start 🚀" : "시작하기 🚀"}
           </button>
         </div>
       </div>
@@ -293,12 +309,15 @@ export default function Home() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-300 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-400 via-cyan-400 to-teal-300 flex items-center justify-center p-4 relative">
+      <div className="fixed top-4 right-4 z-50">
+        <LangSwitch currentLang={lang} onLangChange={(l) => { setLang(l); setLangState(l); }} />
+      </div>
       <div className="max-w-2xl w-full">
         <div className="mb-6">
           <div className="flex justify-between items-center mb-2">
             <span className="text-white font-semibold">
-              질문 {currentQuestion + 1} / {questions.length}
+              {lang === "en" ? "Question" : "질문"} {currentQuestion + 1} / {questions.length}
             </span>
             <span className="text-white font-semibold">
               {Math.round(((currentQuestion + 1) / questions.length) * 100)}%
@@ -317,6 +336,7 @@ export default function Home() {
         <QuestionCard
           question={questions[currentQuestion]}
           onAnswer={handleAnswer}
+          lang={lang}
         />
       </div>
     </div>
