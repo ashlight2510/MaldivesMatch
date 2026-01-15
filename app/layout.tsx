@@ -7,15 +7,18 @@ const basePath = process.env.NEXT_PUBLIC_BASE_PATH ?? (isProd ? '/MaldivesMatch'
 const siteOrigin = process.env.NEXT_PUBLIC_SITE_URL || 'https://maldives.funnyfunny.cloud'
 const siteUrl = `${siteOrigin}${basePath}`
 const ogImageUrl = `${siteUrl}/og-image.svg`;
+// Inline SVG favicon to avoid path/basePath issues.
+const inlineFaviconSvg =
+  "data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='sea' x1='0' y1='0' x2='0' y2='1'%3E%3Cstop offset='0' stop-color='%2337c6f5'/%3E%3Cstop offset='1' stop-color='%230aa0d6'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='14' fill='url(%23sea)'/%3E%3Ccircle cx='46' cy='18' r='8' fill='%23ffd36a'/%3E%3Cpath d='M10 42c6 4 12 4 18 0 6 4 12 4 18 0 6 4 12 4 18 0' fill='none' stroke='%23e8fbff' stroke-width='4' stroke-linecap='round'/%3E%3Cpath d='M20 44c2-10 8-18 12-18 4 0 6 6 4 10' fill='none' stroke='%230b5b4d' stroke-width='3' stroke-linecap='round'/%3E%3Cpath d='M32 26c4-4 8-5 12-3' fill='none' stroke='%230b5b4d' stroke-width='3' stroke-linecap='round'/%3E%3C/svg%3E";
 
 export const metadata: Metadata = {
   title: "몰디브 매치 - 나의 몰디브 성향 찾기",
   description:
     "12개의 전문 질문으로 나에게 맞는 몰디브 여행 스타일을 찾아보세요",
   icons: {
-    icon: `${basePath}/icon.svg`,
-    shortcut: `${basePath}/icon.svg`,
-    apple: `${basePath}/icon.svg`,
+    icon: inlineFaviconSvg,
+    shortcut: inlineFaviconSvg,
+    apple: inlineFaviconSvg,
   },
   openGraph: {
     title: "몰디브 매치 - 나의 몰디브 성향 찾기",
