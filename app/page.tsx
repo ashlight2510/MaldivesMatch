@@ -38,6 +38,30 @@ export default function Home() {
     }
   };
 
+  const getQuestionText = (q: typeof questions[0]) => {
+    return lang === "en" ? (q.questionEn || q.question) : q.question;
+  };
+
+  const getOptionText = (opt: typeof questions[0]["options"][0]) => {
+    return lang === "en" ? (opt.textEn || opt.text) : opt.text;
+  };
+
+  const getPersonalityTypeName = (type: typeof personalityTypes[0]) => {
+    return lang === "en" ? (type.nameEn || type.name) : type.name;
+  };
+
+  const getPersonalityTypeDesc = (type: typeof personalityTypes[0]) => {
+    return lang === "en" ? (type.descriptionEn || type.description) : type.description;
+  };
+
+  const getPersonalityTypeChars = (type: typeof personalityTypes[0]) => {
+    return lang === "en" ? (type.characteristicsEn || type.characteristics) : type.characteristics;
+  };
+
+  const getPersonalityTypeResort = (type: typeof personalityTypes[0]) => {
+    return lang === "en" ? (type.resortRecommendationEn || type.resortRecommendation) : type.resortRecommendation;
+  };
+
   const calculateResult = (userAnswers: number[]) => {
     // 선택한 질문과 답변 로그 출력
     console.log("━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━");
