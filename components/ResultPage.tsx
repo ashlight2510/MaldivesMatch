@@ -446,7 +446,15 @@ export default function ResultPage({ result, onReset, lang }: ResultPageProps) {
 
         {/* 광고 카드 */}
         <div className="bg-white rounded-3xl shadow-2xl p-4 md:p-6 mb-6 flex justify-center">
-          </div>
+          <ins
+            className="adsbygoogle"
+            style={{ display: "block", width: "100%" }}
+            data-ad-client="ca-pub-1204894220949193"
+            data-ad-slot="7300458753"
+            data-ad-format="auto"
+            data-full-width-responsive="true"
+          ></ins>
+        </div>
 
         {/* Footer */}
         <footer className="text-center py-6 text-white/80">
