@@ -8,6 +8,7 @@ import {
   PolarRadiusAxis,
   ResponsiveContainer,
 } from 'recharts';
+import { Language } from '@/lib/i18n';
 
 interface RadarChartProps {
   scores: {
@@ -18,37 +19,47 @@ interface RadarChartProps {
     activity: number;
     budget: number;
   };
+  lang?: Language;
 }
 
-export default function RadarChart({ scores }: RadarChartProps) {
+export default function RadarChart({ scores, lang = 'en' }: RadarChartProps) {
+  const labels = {
+    luxury: lang === 'en' ? 'Luxury' : '럭셔리',
+    underwater: lang === 'en' ? 'Underwater' : '수중환경',
+    lagoon: lang === 'en' ? 'Lagoon' : '라군',
+    food: lang === 'en' ? 'Food' : '음식',
+    activity: lang === 'en' ? 'Activity' : '액티비티',
+    budget: lang === 'en' ? 'Budget' : '가성비',
+  };
+
   const data = [
     {
-      subject: '럭셔리',
+      subject: labels.luxury,
       value: scores.luxury,
       fullMark: 100,
     },
     {
-      subject: '수중환경',
+      subject: labels.underwater,
       value: scores.underwater,
       fullMark: 100,
     },
     {
-      subject: '라군',
+      subject: labels.lagoon,
       value: scores.lagoon,
       fullMark: 100,
     },
     {
-      subject: '음식',
+      subject: labels.food,
       value: scores.food,
       fullMark: 100,
     },
     {
-      subject: '액티비티',
+      subject: labels.activity,
       value: scores.activity,
       fullMark: 100,
     },
     {
-      subject: '가성비',
+      subject: labels.budget,
       value: scores.budget,
       fullMark: 100,
     },
@@ -69,7 +80,7 @@ export default function RadarChart({ scores }: RadarChartProps) {
             tick={{ fill: '#94a3b8', fontSize: 12 }}
           />
           <Radar
-            name="나의 성향"
+            name={lang === 'en' ? 'My Style' : '나의 성향'}
             dataKey="value"
             stroke="#0ea5e9"
             fill="#0ea5e9"

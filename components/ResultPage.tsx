@@ -353,7 +353,7 @@ export default function ResultPage({ result, onReset, lang }: ResultPageProps) {
           <h3 className="text-2xl font-bold text-gray-800 mb-6 text-center">
             📊 {lang === "en" ? "My Travel Style Analysis" : "나의 여행 성향 분석"}
           </h3>
-          <RadarChart scores={scores} />
+          <RadarChart scores={scores} lang={lang} />
 
           {/* 점수 설명 */}
           <div className="mt-8 grid grid-cols-2 md:grid-cols-3 gap-4">
